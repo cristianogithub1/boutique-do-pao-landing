@@ -1,0 +1,27 @@
+/* src/assets/css/background.css */
+.background-logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.08; /* Opacidade reduzida para plano de fundo */
+  background-image: url('../../public/images/logo-boutique.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(100%) saturate(300%) hue-rotate(5deg); /* Tom dourado */
+}
+
+/* Efeito de desfoque sutil */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  z-index: -1;
+}
