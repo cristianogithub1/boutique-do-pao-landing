@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique do Pão - Lista de Preços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos anteriores permanecem os mesmos */
+        
+        /* Novos estilos para a lista de preços */
+        .price-list {
+            background: rgba(252, 250, 250, 0.5);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .price-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .price-tab {
+            padding: 12px 25px;
+            background: #d6d0c3;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .price-tab:hover, .price-tab.active {
+            background: var(--secondary);
+            color: rgb(33, 14, 14);
+            border-color: var(--secondary);
+        }
+        
+        .price-content {
+            display: none;
+        }
+        
+        .price-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .price-table th {
+            background: var(--primary);
+            color: rgb(12, 6, 6);
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .price-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background: #faf7f0;
+        }
+        
+        .price-table tr:hover {
+            background: #f3f1ed;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .product-description {
+            font-size: 0.9rem;
+            color: #7a6a5d;
+            margin-top: 5px;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            text-align: right;
+            white-space: nowrap;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .size-option {
+            background: #f7f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .size-option.active {
+            background: var(--secondary);
+            color: rgb(10, 10, 11);
+        }
+        
+        .add-ons {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #e0d6c1;
+        }
+        
+        .add-on {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .add-on-name {
+            font-size: 0.9rem;
+        }
+        
+        .add-on-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f8f3e6;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho e outras seções permanecem iguais -->
+    
+    <!-- Adicione esta seção após a seção de produtos em destaque -->
+    <section class="price-list">
+        <h2 class="section-title">Nossos Preços</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 30px; color: var(--accent);">
+            Confira nossa tabela de preços completa. Todos os produtos podem ser personalizados com adicionais.
+        </p>
+        
+        <div class="price-tabs">
+            <div class="price-tab active" data-tab="paes">Pães</div>
+            <div class="price-tab" data-tab="salgados">Salgados</div>
+            <div class="price-tab" data-tab="doces">Doces</div>
+            <div class="price-tab" data-tab="bolos">Bolos</div>
+            <div class="price-tab" data-tab="cafes">Bebidas</div>
+        </div>
+        
+        <div class="price-content active" id="paes">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Produto</th>
+                        <th>QUANTIDADE</th>
+                        <th style="text-align: right;">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-name">Pão de cachorro quente</div>
+                            <div class="product-description"></div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">100 </div>
+                                
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 65,00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Pão de hamburguer</div>
+                            <div class="product-description">Só o pão</div>
+                            <div class="add-ons">
+                                <div class="add-on">
+                                    <div class="add-on-name">C/ GERGELIM</div>
+                                    <div class="add-on-price">R$ 95,00</div>
+                                </div>
+                                <div class="add-on">
+                                    <div class="add-on-name">S/ GERGELIM</div>
+                                    <div class="add-on-price">R$ 85,00</div>
+                                </div>
+                            </div>
+                        </td>
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Pão de mini hamburguer</div>
+                            <div class="product-description">Só o pão</div>
+                            <div class="add-ons">
+                                <div class="add-on">
+                                    <div class="add-on-name">C/ GERGELIM</div>
+                                    <div class="add-on-price">R$ 45,00</div>
+                                </div>
+                                <div class="add-on">
+                                    <div class="add-on-name">S/ GERGELIM</div>
+                                    <div class="add-on-price">R$ 40,00</div>
+                                </div>
+                            </div>
+                        </td>
+                        
+                       
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Pão brioche de batata</div>
+                            <div class="product-description">só o pão</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">100</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 45,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="price-content" id="salgados">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Produto</th>
+                        <th>Tamanhos</th>
+                        <th style="text-align: right;">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-name">Coxinha de Frango</div>
+                            <div class="product-description">Frango desfiado com catupiry</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Tradicional</div>
+                                <div class="size-option">Gigante</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 6,50</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Esfiha</div>
+                            <div class="product-description">Carne, queijo ou frango</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Unidade</div>
+                                <div class="size-option">Pacote (6 unid.)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 4,90</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Quiche Lorraine</div>
+                            <div class="product-description">Massa amanteigada com bacon e queijo</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Fatia</div>
+                                <div class="size-option">Inteiro</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 8,90</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="price-content" id="doces">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Produto</th>
+                        <th>Tamanhos</th>
+                        <th style="text-align: right;">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-name">Brigadeiro Gourmet</div>
+                            <div class="product-description">Chocolate belga 70% cacau</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Unidade</div>
+                                <div class="size-option">Caixa (12 unid.)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 3,50</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Pastel de Nata</div>
+                            <div class="product-description">Receita tradicional portuguesa</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Unidade</div>
+                                <div class="size-option">Caixa (6 unid.)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 7,90</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Brownie de Chocolate</div>
+                            <div class="product-description">Com nozes e calda de chocolate</div>
+                            <div class="add-ons">
+                                <div class="add-on">
+                                    <div class="add-on-name">+ Sorvete de creme</div>
+                                    <div class="add-on-price">R$ 4,50</div>
+                                </div>
+                                <div class="add-on">
+                                    <div class="add-on-name">+ Calda extra</div>
+                                    <div class="add-on-price">R$ 1,50</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Fatia</div>
+                                <div class="size-option">Inteiro</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 9,50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="price-content" id="bolos">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Produto</th>
+                        <th>Tamanhos</th>
+                        <th style="text-align: right;">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-name">Bolo de Cenoura</div>
+                            <div class="product-description">Com cobertura de chocolate</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Fatia</div>
+                                <div class="size-option">Pequeno (15cm)</div>
+                                <div class="size-option">Grande (25cm)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 8,90</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Bolo Red Velvet</div>
+                            <div class="product-description">Com cream cheese frosting</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Fatia</div>
+                                <div class="size-option">Pequeno (15cm)</div>
+                                <div class="size-option">Grande (25cm)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 11,90</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Bolo de Fubá</div>
+                            <div class="product-description">Com erva-doce e passas</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Fatia</div>
+                                <div class="size-option">Pequeno (15cm)</div>
+                                <div class="size-option">Grande (25cm)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 7,50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="price-content" id="cafes">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Produto</th>
+                        <th>Tamanhos</th>
+                        <th style="text-align: right;">Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-name">Café Expresso</div>
+                            <div class="product-description">Grãos selecionados</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Pequeno (50ml)</div>
+                                <div class="size-option">Grande (100ml)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 4,50</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Cappuccino</div>
+                            <div class="product-description">Com chocolate ralado</div>
+                            <div class="add-ons">
+                                <div class="add-on">
+                                    <div class="add-on-name">+ Canela</div>
+                                    <div class="add-on-price">R$ 0,50</div>
+                                </div>
+                                <div class="add-on">
+                                    <div class="add-on-name">+ Chocolate extra</div>
+                                    <div class="add-on-price">R$ 1,00</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Pequeno (200ml)</div>
+                                <div class="size-option">Grande (300ml)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 9,90</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-name">Suco Natural</div>
+                            <div class="product-description">Laranja, limão, maracujá ou abacaxi</div>
+                        </td>
+                        <td>
+                            <div class="size-options">
+                                <div class="size-option active">Pequeno (300ml)</div>
+                                <div class="size-option">Grande (500ml)</div>
+                            </div>
+                        </td>
+                        <td class="product-price">R$ 8,50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="note">
+            <p><strong>Observações:</strong></p>
+            <ul>
+                <li>Preços sujeitos a alteração sem aviso prévio</li>
+                <li>Adicionais podem variar conforme o produto</li>
+                <li>Encomendas com no mínimo 24h de antecedência</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Seção de contatos permanece igual -->
+    
+    <script>
+        // JavaScript para as abas de preços
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.price-tab');
+            const contents = document.querySelectorAll('.price-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove classe ativa de todas as abas
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Adiciona classe ativa à aba clicada
+                    tab.classList.add('active');
+                    
+                    // Esconde todos os conteúdos
+                    contents.forEach(content => content.classList.remove('active'));
+                    
+                    // Mostra o conteúdo correspondente
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Adiciona funcionalidade de clique nas opções de tamanho
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const parent = this.parentElement;
+                    parent.querySelectorAll('.size-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
