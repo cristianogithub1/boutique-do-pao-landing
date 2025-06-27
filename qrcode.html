@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gerador de QR Code</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #f9f3e9;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #8b5a2b;
+        margin-bottom: 30px;
+      }
+
+      .qr-container {
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        display: inline-block;
+        margin: 20px 0;
+      }
+
+      .url {
+        margin: 20px 0;
+        font-size: 18px;
+        word-break: break-all;
+      }
+
+      .logo {
+        width: 100px;
+        margin: 0 auto 20px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>QR Code para Boutique do Pão</h1>
+      <div class="qr-container">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://SEU_USUARIO.github.io/boutique-do-pao-landing/&logo=https://cristianogithub1.github.io/boutique-do-pao-landing/images/logo-boutique.png&logoSize=50"
+          alt="QR Code para Boutique do Pão"
+        />
+      </div>
+      <div class="url">
+        URL: https://cristianogithub1.github.io/boutique-do-pao-landing/
+      </div>
+      <p>
+        Escaneie este QR Code para acessar a página de encomendas da Boutique do
+        Pão
+      </p>
+    </div>
+  </body>
+</html>
